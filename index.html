@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nehar Fariha Kouser — 1st Birthday Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f4d068;
+    --gold-light: #fff0c2;
+    --rose: #ff8fa3;
+    --glass: rgba(18, 19, 39, 0.62);
+    --border: rgba(244, 208, 104, 0.28);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-text-size-adjust: none; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #05070f; font-family: 'Montserrat', sans-serif; color: #fff; }
+
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    inset: auto;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body::before {
+    top: -80px;
+    right: -60px;
+    background: radial-gradient(circle, rgba(255, 143, 163, 0.9), transparent 70%);
+  }
+
+  body::after {
+    bottom: -90px;
+    left: -60px;
+    background: radial-gradient(circle, rgba(244, 208, 104, 0.7), transparent 70%);
+  }
+
+  .cosmic-bg {
+    position: fixed;
+    inset: -20px;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(120, 20, 75, 0.5) 0%, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(6, 44, 80, 0.55) 0%, transparent 55%),
+      linear-gradient(135deg, #070913 0%, #12091d 60%, #05070f 100%);
+    background-size: 220% 220%;
+    animation: slowNebula 12s ease infinite alternate;
+    transition: transform 0.1s ease-out;
+  }
+
+  @keyframes slowNebula {
+    0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+    100% { background-position: 100% 100%; filter: hue-rotate(20deg); }
+  }
+
+  canvas#interactionCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .story-viewport {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 22px 120px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .story-progress {
+    position: absolute;
+    top: 14px;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.11);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .story-progress-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--rose));
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: loadBar 2.6s ease forwards;
+  }
+  @keyframes loadBar { 100% { transform: scaleX(1); } }
+
+  .hero-badge {
+    align-self: center;
+    margin: 18px 0 8px;
+    padding: 9px 16px;
+    border: 1px solid rgba(244, 208, 104, 0.35);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(244,208,104,0.12));
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  }
+
+  .bismillah {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    margin: 10px 0 18px;
+    line-height: 1.7;
+    text-shadow: 0 0 12px rgba(244,208,104,0.16);
+  }
+
+  .eyebrow-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .first-birthday-highlight {
+    display: inline-block;
+    margin: 8px 0 16px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(244,208,104,0.2), rgba(255,143,163,0.16));
+    color: #fff8d8;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+  }
+
+  .main-body { text-align: center; }
+
+  .prose-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.84);
+    font-weight: 400;
+    max-width: 440px;
+    margin: 16px auto;
+  }
+
+  .honoree-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(244,208,104,0.08));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 26px 18px;
+    margin: 24px 0 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.42);
+  }
+
+  .honoree-card::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
+    pointer-events: none;
+  }
+
+  .honoree-card::after {
+    content: '✨';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    color: var(--gold);
+    font-size: 18px;
+    opacity: 0.9;
+  }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    animation: floatIcon 2.4s ease-in-out infinite;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .baby-name {
+    font-family: 'Cormorant Garamond', 'Cinzel', serif;
+    font-size: clamp(26px, 7.2vw, 38px);
+    font-weight: 700;
+    color: #fffdf3;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 16px rgba(244, 208, 104, 0.24);
+  }
+
+  .card-subtitle {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--gold-light);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .sparkle-line {
+    margin: 8px auto 0;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  .logistics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0;
+    text-align: right;
+  }
+
+  .info-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .info-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .info-main {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .info-sub {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.67);
+    line-height: 1.6;
+  }
+
+  .lineage-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 24px;
+    margin-top: 18px;
+  }
+
+  .block-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 8px;
+  }
+
+  .parents-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    line-height: 1.8;
+    margin-bottom: 22px;
+  }
+
+  .parents-names span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    opacity: 0.72;
+  }
+
+  .blessings-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .family-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .family-column {
+    flex: 1;
+    text-align: center;
+  }
+
+  .family-column h4 {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .family-column p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .deceased { color: rgba(255,255,255,0.45); }
+
+  .quote-block {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--gold);
+    max-width: 430px;
+    margin: 24px auto 8px;
+    opacity: 0.95;
+  }
+
+  .mobile-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: linear-gradient(to top, rgba(3, 6, 15, 0.98) 78%, transparent);
+    padding: 18px 22px 28px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .action-btn:hover { transform: translateY(-2px); }
+
+  .action-btn.primary {
+    background: linear-gradient(135deg, var(--gold), #ffe9a8);
+    color: #111;
+    box-shadow: 0 10px 24px rgba(244, 208, 104, 0.24);
+  }
+
+  .action-btn.secondary {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 700px) {
+    .story-viewport { padding: 48px 32px 140px; }
+    .logistics-container { flex-direction: row; }
+    .info-card { flex: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="cosmic-bg" id="bgNebula"></div>
+<canvas id="interactionCanvas"></canvas>
+
+<div class="story-viewport">
+  <div class="story-progress"><div class="story-progress-fill"></div></div>
+
+  <div class="hero-badge">A Royal Celebration</div>
+  <p class="bismillah">A little star is turning one</p>
+  <p class="eyebrow-title">First Birthday Invitation</p>
+  <div class="first-birthday-highlight">🎉 1st Birthday Celebration 🎂</div>
+
+  <div class="main-body">
+    <p class="prose-text">
+      With grateful hearts and joyful spirits, we are delighted to invite you and your family to celebrate the first birthday of our beloved daughter,
+    </p>
+
+    <div class="honoree-card">
+      <div class="card-icon">🌙</div>
+      <h2 class="baby-name">Nehar Fariha Kouser</h2>
+      <p class="card-subtitle">One year of love, light and laughter</p>
+      <div class="sparkle-line">✦ ✦ ✦</div>
+    </div>
+
+    <p class="prose-text">
+      As she completes a beautiful year filled with love, laughter, and precious memories.
+    </p>
+
+    <p class="prose-text">
+      Your presence and warm blessings will make this milestone even more unforgettable.
+    </p>
+  </div>
+
+  <div class="logistics-container">
+    <div class="info-card">
+      <div class="info-label">Date</div>
+      <div class="info-main">Saturday, 18 July 2026</div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-label">Venue</div>
+      <div class="info-main">Fine Banquets</div>
+      <div class="info-sub">Mahamood Nagar, Bandlaguda, Chandrayangutta<br>Hyderabad – 500005, Telangana</div>
+    </div>
+  </div>
+
+  <div class="lineage-container">
+    <div class="block-title">With love from</div>
+    <p class="parents-names">
+      Dr. Arshiya Kouser <span>(Mother)</span><br>
+      Moinuddin Basha <span>(Father)</span>
+    </p>
+
+    <div class="blessings-title">With the blessings of</div>
+
+    <div class="family-flex">
+      <div class="family-column">
+        <h4>Paternal family</h4>
+        <p>
+          <span class="deceased">Late Usman Basha</span><br>
+          Irshad Basha<br>
+          Inayat Basha
+        </p>
+      </div>
+      <div class="family-column">
+        <h4>Maternal family</h4>
+        <p>
+          Shaik Mohammed Yaseen<br>
+          Shaik Sabiha<br>
+          Shaik Mohammed Yaseer
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p class="quote-block">"The sweetest memories are made when family gathers in love."</p>
+
+  <p class="prose-text" style="font-style: italic; margin-bottom: 22px;">
+    We would be truly honored by your gracious presence at this cherished celebration.
+  </p>
+</div>
+
+<div class="mobile-actions">
+  <a href="https://maps.google.com/?q=Fine+Banquets+Mahamood+Nagar+Bandlaguda+Hyderabad" class="action-btn primary" target="_blank">
+    📍 Open Directions
+  </a>
+  <a href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ASUMMARY:Nehar%20Fariha%20Kouser%201st%20Birthday%0ADTSTART:20260718T200000%0ADESCRIPTION:First%20Birthday%20Celebration%0ALOCATION:Fine%20Banquets%20Hyderabad%0AEND:VEVENT%0AEND:VCALENDAR" class="action-btn secondary" download="event_milestone.ics">
+    🗓 Save the Date
+  </a>
+</div>
+
+<script>
+  /* --- TOUCH-RESPONSIVE SPARK CANVAS MOTOR ENGINE --- */
+  const canvas = document.getElementById('interactionCanvas');
+  const ctx = canvas.getContext('2d');
+  let sparks = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class CosmicSparkle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = (Math.random() - 0.5) * 2;
+      this.speedY = (Math.random() - 0.5) * 2;
+      this.color = `rgba(244, 208, 104, ${Math.random() * 0.5 + 0.5})`;
+      this.life = 1.0;
+      this.decay = Math.random() * 0.02 + 0.02;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.life -= this.decay;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = this.life;
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function registerSparks(e) {
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    for (let i = 0; i < 3; i++) {
+      sparks.push(new CosmicSparkle(x, y));
+    }
+  }
+
+  window.addEventListener('mousemove', registerSparks);
+  window.addEventListener('touchmove', registerSparks, { passive: true });
+
+  function renderLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Auto generate soft cosmic ambiance stars if stationary
+    if(Math.random() < 0.12) {
+      sparks.push(new CosmicSparkle(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
+
+    sparks = sparks.filter(s => s.life > 0);
+    sparks.forEach(s => {
+      s.update();
+      s.draw();
+    });
+    requestAnimationFrame(renderLoop);
+  }
+  renderLoop();
+
+  /* --- HARDWARE KINETIC MOVEMENTS --- */
+  const nebulaBg = document.getElementById('bgNebula');
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', (event) => {
+      const xDrift = event.gamma ? (event.gamma / 7) : 0; 
+      const yDrift = event.beta ? (event.beta / 7) : 0;
+      nebulaBg.style.transform = `translate3d(${xDrift}px, ${yDrift}px, 0)`;
+    }, true);
+  }
+</script>
+
+</body>
+</html>
