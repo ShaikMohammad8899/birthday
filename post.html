@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nehar Fariha Kouser's 1st Birthday Invitation</title>
+    <!-- Google Fonts for Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --primary-deep: #06261a;
+            --primary-light: #0d4430;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            --gold-solid: #d4af37;
+            --text-light: #f5f7f6;
+            --text-dark: #222222;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--primary-deep);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* BACKGROUND VFX EFFECTS */
+        .bg-vfx {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 30%, var(--primary-light) 0%, var(--primary-deep) 70%);
+            overflow: hidden;
+        }
+
+        /* Ambient Glowing Orbs */
+        .orb {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--gold-solid);
+            filter: blur(100px);
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: floatOrb 10s infinite alternate ease-in-out;
+        }
+        .orb-1 { top: 10%; left: -20px; }
+        .orb-2 { bottom: 15%; right: -20px; animation-delay: -5s; }
+
+        @keyframes floatOrb {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(30px) scale(1.2); }
+        }
+
+        /* CSS-BASED PARTY CONFETTI PARTICLES */
+        .confetti-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            display: none; /* Triggered via JS */
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background: var(--gold-solid);
+            opacity: 0.8;
+            top: -20px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+
+        /* INTERACTIVE ENVELOPE / INTRO SCREEN (UX-focused) */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-deep);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #intro-overlay.hide {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .envelope-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 40px 24px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            width: 340px;
+            position: relative;
+        }
+
+        .envelope-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1.5px;
+            background: var(--gold-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .open-btn {
+            background: var(--gold-gradient);
+            color: #222;
+            border: none;
+            padding: 14px 28px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            margin-top: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .open-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* MAIN APP / SCROLLABLE CONTENT CONTAINER */
+        .scroll-container {
+            width: 100%;
+            max-width: 480px; /* Perfectly optimized for all premium mobile screens */
+            margin: 0 auto;
+            padding: 24px 16px 40px 16px;
+            box-sizing: border-box;
+        }
+
+        /* MANDALA / ORNAMENTAL GRAPHIC COMPONENTS */
+        .islamic-crest {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px auto;
+            opacity: 0.9;
+        }
+
+        /* TEXT GRADIENTS & TYPOGRAPHY STYLE GUIDE */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .bismillah {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .age-badge {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .intro-p {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            text-align: center;
+            opacity: 0.85;
+            padding: 0 10px;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        /* CENTRAL FOCUS HERO COMPONENT */
+        .baby-name-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+        }
+
+        .baby-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .sub-tagline {
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* CORE DETAIL MODULES (DATE & VENUE) */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .card-label::before, .card-label::after {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold-solid);
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .date-highlight {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .venue-text {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* INTERACTIVE UX ELEMENT - MAP NAVIGATOR */
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        .map-btn:active {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* HIERARCHICAL HOST GRID ARCHITECTURE */
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin: 30px 0 15px 0;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .host-mini-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .host-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .host-relation {
+            font-size: 0.72rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .blessings-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .family-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .family-names {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            text-align: center;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* POETIC CLOSING BLOCK */
+        .quote-box {
+            text-align: center;
+            padding: 30px 10px;
+            position: relative;
+        }
+
+        .quote-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .final-call {
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* SCROLL ANIMATION VFX TRIGGERS */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VISUAL EFFECTS LAYER -->
+    <div class="bg-vfx">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- PERSISTENT APP ENTRY OVERLAY (ONBOARDING UX) -->
+    <div id="intro-overlay">
+        <div class="envelope-card">
+            <!-- Vector Islamic Star Pattern Emblem -->
+            <svg class="islamic-crest" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L14.8 6.8L20 8L16.2 11.8L17.4 17L12 14.8L6.6 17L7.8 11.8L4 8L9.2 6.8L12 2Z" stroke="url(#gold-grad)" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="11.5" r="3" stroke="url(#gold-grad)" stroke-width="1"/>
+                <defs>
+                    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#bf953f" />
+                        <stop offset="50%" stop-color="#fcf6ba" />
+                        <stop offset="100%" stop-color="#aa771c" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2 class="main-title" style="font-size: 0.9rem;">The Birthday Invitation of</h2>
+            <h1 class="gold-text" style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin: 10px 0;">Nehar Fariha</h1>
+            <p style="font-size: 0.75rem; opacity: 0.6; letter-spacing: 1px; text-transform: uppercase;">1st Birthday Celebration</p>
+            <button class="open-btn" onclick="openInvitation()">Open Invitation</button>
+        </div>
+    </div>
+
+    <!-- MAIN IMMERSIVE CONTENT WIREFRAME -->
+    <div class="scroll-container">
+        
+        <!-- HEADER BLOCK -->
+        <div class="bismillah gold-text">
+            ✨ In the Name of Allah, the Most Gracious, the Most Merciful ✨
+        </div>
+
+        <h2 class="main-title reveal-element">A Little Star Turns</h2>
+        <div class="age-badge gold-text reveal-element">One</div>
+
+        <p class="intro-p reveal-element">
+            With hearts overflowing with gratitude to Allah for His countless blessings, we are delighted to invite you and your family to celebrate the First Birthday of our beloved daughter,
+        </p>
+
+        <!-- STATEMENT HERO CONTAINER -->
+        <div class="baby-name-card reveal-element">
+            <span class="baby-name gold-text">Nehar Fariha Kouser</span>
+            <span class="sub-tagline">as she completes a beautiful year of love, laughter, and precious memories.</span>
+        </div>
+
+        <p class="intro-p reveal-element" style="margin-bottom: 35px;">
+            Your presence and heartfelt blessings will make this joyous milestone even more special and memorable for our family.
+        </p>
+
+        <!-- DATE METADATA COMPONENT -->
+        <div class="glass-card reveal-element">
+            <div class="card-label gold-text">🗓 Date</div>
+            <div class="date-highlight">Saturday, 18 July 2026</div>
+        </div>
+
+        <!-- VENUE METADATA COMPONENT -->
+        <div class="glass-card reveal-element">
+            <div class="card-label gold-text">📍 Venue</div>
+            <div class="venue-text">
+                <strong>Fine Banquets</strong><br>
+                Mahamood Nagar, Bandlaguda, Chandrayangutta,<br>
+                Hyderabad – 500005, Telangana
+            </div>
+            <!-- Interactive UX Layer: Launches direct navigation maps -->
+            <a href="https://maps.google.com/?q=Fine+Banquets+Chandrayangutta+Hyderabad" target="_blank" class="map-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                View on Google Maps
+            </a>
+        </div>
+
+        <!-- HOST ARCHITECTURE SCHEMATICS -->
+        <div class="section-title reveal-element">Cordially Invited By</div>
+        <div class="hosts-grid reveal-element">
+            <div class="host-mini-card">
+                <div class="host-name">Dr. Arshiya Kouser</div>
+                <div class="host-relation gold-text">Mother</div>
+            </div>
+            <div class="host-mini-card">
+                <div class="host-name">Moinuddin Basha</div>
+                <div class="host-relation gold-text">Father</div>
+            </div>
+        </div>
+
+        <!-- GENERATIONAL BLESSINGS MODULES -->
+        <div class="section-title reveal-element">With the Blessings of</div>
+        
+        <div class="blessings-panel reveal-element">
+            <div class="family-title gold-text">Paternal Family</div>
+            <div class="family-names">
+                Late Usman Basha &bull; Irshad Basha &bull; Inayat Basha
+            </div>
+        </div>
+
+        <div class="blessings-panel reveal-element">
+            <div class="family-title gold-text">Maternal Family</div>
+            <div class="family-names">
+                Shaik Mohammed Yaseen &bull; Shaik Sabiha &bull; Shaik Mohammed Yaseer
+            </div>
+        </div>
+
+        <!-- OUTRO / CLOSING STATEMENT -->
+        <div class="quote-box reveal-element">
+            <p class="quote-text">
+                "The greatest gift in life is the blessing of family, and the greatest joy is celebrating together."
+            </p>
+            <p class="final-call gold-text">
+                We would be truly honored by your gracious presence as we celebrate this cherished occasion.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- FUNCTIONAL INTERACTIVE UX CONTROLLER SCRIPT -->
+    <script>
+        // Trigger Entrance Overlay dismissal & Initiate VFX Particles
+        function openInvitation() {
+            document.getElementById('intro-overlay').classList.add('hide');
+            initConfetti();
+            setTimeout(triggerScrollReveal, 400); // Sequence animations beautifully
+        }
+
+        // Native High-Performance CSS Confetti Particle Spawner
+        function initConfetti() {
+            const container = document.getElementById('confetti');
+            container.style.display = 'block';
+            const colors = ['#bf953f', '#fcf6ba', '#b38728', '#ffffff', '#0d4430'];
+            
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('confetti');
+                
+                // Randomize positions, colors and fall dynamics for natural visual texture
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
+                
+                const duration = Math.random() * 2.5 + 2.5; 
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = Math.random() * 0.5 + 's';
+                
+                container.appendChild(particle);
+                
+                // Garbage Collection: Cleanup nodes after execution lifecycle loop
+                setTimeout(() => { particle.remove(); }, (duration + 0.5) * 1000);
+            }
+        }
+
+        // Clean, High-Performance Scroll Reveal Intersection Observers
+        function triggerScrollReveal() {
+            const elements = document.querySelectorAll('.reveal-element');
+            
+            const observerOptions = {
+                root: null,
+                threshold: 0.05,
+                rootMargin: "0px 0px -40px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Retain performance structures by unobserving once drawn
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            elements.forEach(el => observer.observe(el));
+        }
+    </script>
+</body>
+</html>
